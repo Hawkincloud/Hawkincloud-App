@@ -1,0 +1,189 @@
+{% extends "bootstrap/base.html" %}
+
+{% block title %}
+Demo App
+{% endblock %}
+
+{% block styles %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('.static', filename='starter-template.css') }}">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dynatable/0.3.1/jquery.dynatable.min.js"></script>
+
+<style>
+    /* Add grid texture background */
+    body {
+        background-image: url('https://cdn.wallpapersafari.com/27/85/YnsSaX.jpg'); /* Replace with your grid texture image URL */
+        background-repeat: no-repeat; /* Remove repeat property */
+        background-size: cover; /* Set the size property to cover */
+        background-position: center center; /* Set background position to center */
+        height: 100vh; /* Set height to 100vh to cover entire screen */
+    }
+    .navbar-brand {
+        font-family: 'Techno Chain Outline', sans-serif;
+        font-size: 29px; /* Replace with your desired font size */
+        font-weight: bold; /* Replace with your desired font weight */
+        /* Add any additional styles as needed */
+    }
+    .navbar-brand1{
+        font-family: 'eagles', sans-serif;
+
+    }
+    .navbar-inverse {
+    background-color: #222;
+    border: 1px solid #080808;
+    border-image: linear-gradient(to right, #80f3ed, #0c05b0) 1;
+    /* Pulse effect for box shadow */
+    box-shadow: 0px 0px 44px 0px #80f3ed, 0px 0px 55px 21px #0c05b0;
+    animation: pulse 2s infinite;
+}
+
+/* Keyframe animation for pulse effect */
+@keyframes pulse {
+    0% {
+        box-shadow: 0px 0px 34px 0px #80f3ed, 0px 0px 55px 21px #0c05b0;
+    }
+    50% {
+        box-shadow: 0px 0px 24px 0px #0c05b0, 0px 0px 55px 21px #80f3ed;
+    }
+    100% {
+        box-shadow: 0px 0px 64px 0px #80f3ed, 0px 0px 55px 21px #0c05b0;
+    }
+}
+p {
+    margin: 17px -45px 6px;
+    font-family: 'Leyton', sans-serif;
+
+}
+@font-face {
+  font-family: 'Techno Chain Extrude';
+  src: url('/static/fonts/TechnoChainExtrude.otf') format('opentype');
+  /* Add additional font file formats (e.g., woff, woff2) if needed */
+}
+
+@font-face {
+  font-family: 'Techno Chain Outline';
+  src: url('/static/fonts/TechnoChainOutline.otf') format('opentype');
+  /* Add additional font file formats (e.g., woff, woff2) if needed */
+}
+
+@font-face {
+  font-family: 'Techno Chain Rounded';
+  src: url('/static/fonts/TechnoChainRounded.otf') format('opentype');
+  /* Add additional font file formats (e.g., woff, woff2) if needed */
+}
+
+@font-face {
+  font-family: 'Techno Chain';
+  src: url('/static/fonts/TechnoChain.otf') format('opentype');
+  /* Add additional font file formats (e.g., woff, woff2) if needed */
+}
+@font-face {
+  font-family: 'Leyton';
+  src: url('/static/fonts/Leyton-Bold.otf') format('opentype');
+  /* Add additional font file formats (e.g., woff, woff2) if needed */
+}
+@font-face {
+  font-family: 'Ambattur';
+  src: url('/static/fonts/Ambattur-Sign.otf') format('opentype');
+  /* Add additional font file formats (e.g., woff, woff2) if needed */
+}
+h3 {
+      font-family: 'Ambattur', sans-serif;
+      font-size: 50px;
+      /* Use the font-family name you defined in your CSS rule */
+      /* If the Techno Chain font is not available, fallback to a sans-serif font */
+    }
+h1 {
+      font-family: 'Techno Chain', sans-serif;
+      /* Use the font-family name you defined in your CSS rule */
+      /* If the Techno Chain font is not available, fallback to a sans-serif font */
+    }
+    .image-container {
+  perspective: 1000px;
+}
+
+.image {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  animation: breathe 4s ease-in-out infinite;
+}
+
+@keyframes breathe {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+</style>
+
+<!-- Include Plotly.js -->
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+{% endblock %}
+
+{% block content %}
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <a class="navbar-brand" href="#">HawkinCloud</a>
+        </div>
+
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+                <li><a href="{{ url_for('login') }} "><span class="glyphicon glyphicon-user"></span> Login</a></li>
+                <li><a href="{{ url_for('signup') }}"><span class="glyphicon glyphicon-cog"></span> Sign Up</a></li>
+                <li><a href="{{ url_for('charts') }}">Charts</a></li>
+                <li><a href="{{ url_for('kms') }}">KMS</a></li>
+
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
+
+<div class="container">
+
+    <div class="starter-template">
+        <center><div class="image-container">
+            <img class="image top" src="https://github.com/aliyevom/App-Hawkincloud/blob/master/src/static/pics/logo__4-removebg.png?raw=true" alt="Mike" height="200px" width="210px">
+
+        </div>
+
+        </center>
+
+        <h1>HawkinCloud</h1>
+        <h3>"Audit, Monitor and Analyze your AWS Account activity."
+
+        </h3>
+<br>
+      
+        <center><div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <span class="glyphicon glyphicon-bookmark"></span>
+
+            <h5 class="card-title">Documentation</h5>
+            <hr style="border-color: black;">
+            <p class="card-text">A capstone project at UMass Boston using AWS CloudTrail could involve using the service to monitor and analyze the activity within a specified AWS account for security or compliance purposes. </p>
+            <a href="http://hawkincloud.github.io/dev/" class="btn btn-primary">Read More</a>
+          </div>
+        </div></center>
+
+
+    </div><!-- /.container -->
+
+    
+{% endblock %}

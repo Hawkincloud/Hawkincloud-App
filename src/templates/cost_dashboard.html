@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AWS Cost Dashboard</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+</head>
+<body>
+  <h1>AWS Cost Dashboard</h1>
+  
+  <div>
+    <canvas id="costChart"></canvas>
+  </div>
+
+  <script>
+    // Get the cost data from Flask route
+    var costData = {{ cost_data|tojson }};
+    
+    // Extract the cost data and labels for chart
+    var costLabels = costData.map(function(item) {
+      return item['TimePeriod']['Start'];
+    });
+    var blendedCostData = costData.map(function(item) {
+      return item['Total']['BlendedCost']['Amount'];
+    });
+    var unblendedCostData = costData.map(function(item) {
+      return item['Total']['UnblendedCost']['Amount'];
+    });
+
+    // Create a bar chart using Chart.js
+    var ctx = document.getElementById('costChart').getContext('2d');
+    var chart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: costLabels,
+        datasets: [{
+          label: 'Blended Cost',
+          data: blendedCostData,
+          backgroundColor: 'rgba(75, 192, 192, 0.2)',
+          borderColor: 'rgba(75, 192, 192, 1)',
+          borderWidth: 1
+        }, {
+          label: 'Unblended Cost',
+          data: unblendedCostData,
+          backgroundColor: 'rgba(255, 99, 132, 0.2)',
+          borderColor: 'rgba(255, 99, 132, 1)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+            callback: function(value, index, values) {
+              return '$' + value; // Add '$' prefix to y-axis labels
+            }
+          }
+        },
+        plugins: {
+          title: {
+            display: true,
+            text: 'Top Costs for Current Month Events', // Set chart title
+            font: {
+              size: 16
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

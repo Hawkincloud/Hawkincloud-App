@@ -1,0 +1,73 @@
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}
+Sign Up
+{% endblock %}
+
+{% block styles %}
+{{super()}}
+<link rel="stylesheet" href="{{url_for('.static', filename='signin.css')}}">
+<style>
+body {
+  background-image: url('https://cdn.wallpapersafari.com/27/85/YnsSaX.jpg'); /* Replace with your grid texture image URL */
+  background-repeat: no-repeat; /* Remove repeat property */
+  background-size: cover; /* Set the size property to cover */
+  background-position: center center; /* Set background position to center */
+  height: 100vh; /* Set height to 100vh to cover entire screen */
+}
+.info-box {
+  position: relative;
+  display: inline-block;
+}
+
+.glyphicon-info-sign {
+  font-size: 20px;
+  color: #337ab7; /* You can change the color to your preference */
+  cursor: pointer;
+}
+
+.info-content {
+  display: none;
+  position: absolute;
+  top: -4px;
+  left: 28px;
+  background-color: #f9f9f9; /* You can change the background color to your preference */
+  color: #333;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 392px; /* You can change the width to your preference */
+  height: 35px;
+}
+
+.info-box:hover .info-content {
+  display: table;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <form class="form-signin" method="POST" action="/signup">
+    <center>                                    <img class="image top" src="https://github.com/aliyevom/App-Hawkincloud/blob/master/src/static/pics/logo__4-removebg.png?raw=true" alt="Mike" height="200px" width="210px">
+    </center>
+
+    <h2 class="form-signin-heading">Sign Up</h2>
+
+    {{ form.hidden_tag() }}
+    {{ wtf.form_field(form.username) }}
+    {{ wtf.form_field(form.email) }}
+    {{ wtf.form_field(form.password) }}
+    <div class="info-box">
+      {{ wtf.form_field(form.agreement) }}
+      <span class="glyphicon glyphicon-info-sign"></span>
+      <div class="info-content">
+        <p>Check the critical effect of costs on Amazon Web Services, and I agree with this feature. [Insert your IP address]</p>
+      </div>
+    </div><!-- Add this line for the agreement field -->
+
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
+  </form>
+</div> <!-- /container -->
+{% endblock %}
