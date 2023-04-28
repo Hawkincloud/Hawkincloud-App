@@ -302,8 +302,8 @@ def log_download():
         eastern_tz = pytz.timezone('America/New_York')
         timestamp_et = eastern_tz.normalize(timestamp_utc.astimezone(eastern_tz)).strftime('%Y-%m-%d %H:%M:%S')
 
-        # Log the download event using loguru
-        logger.info(f'Download event: file={file_name}, ip_address={ip_address}, timestamp={timestamp_et}')
+        # Log the download event using print statements
+        print(f'Download event: file={file_name}, ip_address={ip_address}, timestamp={timestamp_et}')
 
         # Append the logged event to the list
         logged_events.append(f'Download event: file={file_name}, ip_address={ip_address}, timestamp={timestamp_et}')
@@ -325,6 +325,7 @@ def log_download():
         table += '</table>'
 
         return table
+
 
 @app.route('/charts')
 def charts():
