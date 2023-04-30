@@ -12,7 +12,6 @@ import boto3
 from datetime import datetime, timedelta
 import random
 import logging
-from loguru import logger
 import pytz
 
 
@@ -307,7 +306,6 @@ def log_download():
 
         # Append the logged event to the list
         logged_events.append(f'Download event: file={file_name}, ip_address={ip_address}, timestamp={timestamp_et}')
-
         return 'OK'
     elif request.method == 'GET':
         # Generate an HTML table with the logged events
@@ -325,7 +323,6 @@ def log_download():
         table += '</table>'
 
         return table
-
 
 @app.route('/charts')
 def charts():
