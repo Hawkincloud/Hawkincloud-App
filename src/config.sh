@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Install required packages
-pip install -r requirements.txt
+pip install -r ../requirements.txt
 
 # Create database tables using Flask shell
 flask shell <<EOF
