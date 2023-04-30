@@ -283,7 +283,7 @@ def signup():
        db.session.add(new_user)
        db.session.commit()
 
-       return '<h1> New user has been created! </h1>'
+       return '<h1>New user has been created! <a href="' + url_for('login') + '">Go home</a></h1>'
     pic1 = os.path.join(app.config['UPLOAD_FOLDER'], 'logo__4-removebg.png')
     return render_template('signup.html', user_image=pic1, form=form)
 # Day 6
