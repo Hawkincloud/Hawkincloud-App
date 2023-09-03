@@ -1,14 +1,11 @@
 # HawkinCloud	
 
 
-
 ![Logo](https://media.licdn.com/dms/image/C4E22AQFVYKQSeAQiBw/feedshare-shrink_800/0/1676488732559?e=2147483647&v=beta&t=HFqpHG8nQ8OHVztNWZQI9l_Ls6a7JCXHyXoJwyv9GGI)
-
 
 ## Support
 
 For support, email aliyevdevops@gmail.com 
-
 
 
 
@@ -37,7 +34,6 @@ Install container and images from Github
 ```shell
 git clone https://github.com/Hawkincloud/Hawkincloud-App.git
 ```
-
 
 #### Environment Variables in AWS CLI
 
